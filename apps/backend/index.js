@@ -26,7 +26,7 @@ async function connectDB(){
 connectDB();
 
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  origin: ['http://localhost:5173', 'https://tracker-97by.onrender.com'],
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -50,7 +50,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {  // pass the http.Server instance
   cors: {
-    origin: '*',
+    origin: ['https://tracker-97by.onrender.com'],
     methods: ['GET', 'POST']
   }
 });
