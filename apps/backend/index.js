@@ -56,6 +56,8 @@ const io = new Server(server, {  // pass the http.Server instance
 });
 
 let users = {};
+  let userSockets = {};
+
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
@@ -73,11 +75,9 @@ io.on('connection', (socket) => {
       delete users[userId];
       delete userSockets[socket.id];
     }
-    io.emit('update-locations', users);
+    io.emit('update-location', users);
   });
 });
 
-server.listen(3000, () => console.log('Server running on 3000'
-
-));
+server.listen(PORT, () => console.log(`Server running on ${PORT}`));
 
