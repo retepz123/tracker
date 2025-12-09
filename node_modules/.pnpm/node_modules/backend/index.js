@@ -50,7 +50,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {  // pass the http.Server instance
   cors: {
-    origin: ['https://tracker-97by.onrender.com'],
+    origin: ['https://tracker-97by.onrender.com', 'http://localhost:3000'],
     methods: ['GET', 'POST']
   }
 });

@@ -70,8 +70,9 @@ export default function MapView() {
 
   // Listen for updates from server
   useEffect(() => {
-    socket.on('update-locations', (allUsers) => {
-      setUsers(allUsers);
+    socket.on('update-locations', (users) => {
+      console.log('Received all users:', users);
+      setUsers(users);
     });
 
     return () => {
