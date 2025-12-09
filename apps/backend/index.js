@@ -56,28 +56,30 @@ const io = new Server(server, {  // pass the http.Server instance
 });
 
 let users = {};
-  let userSockets = {};
-
+let userSockets = {};
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  socket.on('send-location', ({ userId, lat, lng}) => {
-    users[userId] = {lat, lng};
+  socket.on('send-location', ({ userId, lat, lng }) => {
+    users[userId] = { lat, lng };
+    userSockets[socket.id] = userId;
 
-    //broadcast the location to other user
     io.emit('update-location', users);
+    console.log('Users updated:', users);
   });
 
-   socket.on('disconnect', () => {
+  socket.on('disconnect', () => {
     const userId = userSockets[socket.id];
     if (userId) {
       delete users[userId];
       delete userSockets[socket.id];
     }
     io.emit('update-location', users);
+    console.log('User disconnected. Users now:', users);
   });
 });
+
 
 server.listen(PORT, () => console.log(`Server running on ${PORT}`));
 
