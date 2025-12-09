@@ -64,14 +64,14 @@ io.on('connection', (socket) => {
     users[userId] = {lat, lng};
 
     //broadcast the location to other user
-    io.emit('update-location:', users);
+    io.emit('update-location', users);
   });
 
    socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-    // Remove user from the list
-    for (let id in users) {
-      if (id === socket.id) delete users[id];
+    const userId = userSockets[socket.id];
+    if (userId) {
+      delete users[userId];
+      delete userSockets[socket.id];
     }
     io.emit('update-locations', users);
   });
