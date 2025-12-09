@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { axiosInstance } from '../lib/axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BACKEND = import.meta.env.VITE_BACKEND_URL;
 
@@ -55,6 +56,7 @@ function SignUp() {
         <input onChange={handleChange} value={form.password} type='password' placeholder='Password' name='password' />
         <button type='submit'>Submit</button>
       </form>
+      <Link to='/login'>Login</Link>
     </div>
   );
 }

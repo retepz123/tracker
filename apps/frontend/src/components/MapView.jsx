@@ -84,7 +84,7 @@ export default function MapView() {
   const currentUser = { username: authUser.user.username };
 
   return (
-    <div>
+    <div className='container'>
       <h1>Tracker</h1>
       <div className='map-container'>
         <MapContainer center={[14.2105, 121.0404]} zoom={13} className='map'>

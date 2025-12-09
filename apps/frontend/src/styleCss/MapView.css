@@ -1,5 +1,16 @@
+@media (min-width: 320px) and (max-width: 600px){
+
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+}
+
 .map-container{
-  width: 50%;
+  width: 80%;
   height: 500px;
   border: 1px solid black;
 }
