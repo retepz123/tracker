@@ -9,45 +9,54 @@ import { Marker, Popup } from 'react-leaflet';
 
 function LocationMarker({ user }) {
   const map = useMap();
-    const markerRef = useRef(null);
+  const markerRef = useRef(null);
+  const initialCenter = useRef(false);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !user.username) return;
 
-    // Watch user location continuously
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+          p => console.log(p.coords.accuracy),
+           e => console.error(e),
 
         // Send location to server
-        socket.emit('send-location', {
-          userId: user.username, // use username as id
+        socket.emit("send-location", {
+          userId: user.username,
           lat: latitude,
           lng: longitude,
         });
 
-        // Add/update marker for current user
-       if (!markerRef.current) {
+        // Create marker if not exist
+        if (!markerRef.current) {
           markerRef.current = L.marker([latitude, longitude])
             .addTo(map)
-            .bindPopup(`🙋‍♂️ ${user.username}`)
-            .openPopup();
+            .bindPopup(`🙋‍♂️ ${user.username}`);
         } else {
           markerRef.current.setLatLng([latitude, longitude]);
         }
 
-        map.setView([latitude, longitude], 16);
+        // Initial center only ONCE
+        if (!initialCenter.current) {
+          map.setView([latitude, longitude], 16);
+          initialCenter.current = true;
+        }
       },
       (err) => console.error(err),
       {
         enableHighAccuracy: true,
         maximumAge: 0,
-        timeout: 3000,
+        timeout: 5000,
       }
     );
 
     return () => {
       navigator.geolocation.clearWatch(watchId);
+      if (markerRef.current) {
+        map.removeLayer(markerRef.current);
+        markerRef.current = null;
+      }
     };
   }, [map, user]);
 

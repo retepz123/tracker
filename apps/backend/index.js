@@ -57,6 +57,7 @@ const io = new Server(server, {  // pass the http.Server instance
 
 let users = {};
 let userSockets = {};
+let userCounts = {};
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
@@ -65,6 +66,13 @@ io.on('connection', (socket) => {
     users[userId] = { lat, lng };
     userSockets[socket.id] = userId;
 
+      if (!userCounts[userId]) userCounts[userId] = 0;
+    userCounts[userId] += 1;
+
+    // Update the user's latest location
+    users[userId] = { lat, lng };
+
+    //broadcast the location to all users
     io.emit('update-location', users);
     console.log('Users updated:', users);
   });
@@ -72,9 +80,11 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const userId = userSockets[socket.id];
     if (userId) {
-      delete users[userId];
       delete userSockets[socket.id];
+      userCounts[userId] -= 1;
     }
+
+    //broadcast updated users
     io.emit('update-location', users);
     console.log('User disconnected. Users now:', users);
   });
