@@ -89,7 +89,7 @@ export default function MapView() {
     };
   }, []);
 
-  if (!authUser) return <div>Loading user...</div>;
+  if (!authUser?.user) return <div>Loading user...</div>;
 
   const currentUser = { username: authUser.user.username };
 
