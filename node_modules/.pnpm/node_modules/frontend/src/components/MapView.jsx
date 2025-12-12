@@ -6,9 +6,9 @@ import { useEffect, useState, useRef} from 'react';
 import L from 'leaflet';
 import { socket } from '../lib/socket';
 import { Marker, Popup } from 'react-leaflet';
-import iconRetina from '/src/assets/leaflet/marker-icon-2x.png';
-import icon from '/src/assets/leaflet/marker-icon.png';
-import shadow from '/src/assets/leaflet/marker-shadow.png';
+import iconRetina from '/src/assets/marker-icon-2x.png';
+import icon from '/src/assets/marker-icon.png';
+import shadow from '/src/assets/marker-shadow.png';
 
 function LocationMarker({ user }) {
   const map = useMap();
