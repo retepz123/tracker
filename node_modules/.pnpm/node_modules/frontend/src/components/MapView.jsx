@@ -79,13 +79,13 @@ export default function MapView() {
 
   // Listen for updates from server
   useEffect(() => {
-    socket.on('update-locations', (users) => {
+    socket.on('update-location', (users) => {
       console.log('Received all users:', users);
       setUsers(users);
     });
 
     return () => {
-      socket.off('update-locations');
+      socket.off('update-location');
     };
   }, []);
 
