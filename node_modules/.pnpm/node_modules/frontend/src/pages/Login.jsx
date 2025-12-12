@@ -28,12 +28,15 @@ function Login() {
       const res = await axiosInstance.post('/api/auth/login', {username, password});
 
       if (res.data?.token){
+        console.log(res.data);
         localStorage.setItem('token', res.data.token);
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-        localStorage.setItem('user', JSON.stringify(res.data.newUser));
+
+        localStorage.setItem('user', JSON.stringify(res.data.user));
 
         setLoggedIn(true);
-        alert('Successfully Logged In')
+        console.log('Succesfully Logged-in');
+        alert('Successfully Logged In');
 
       } else {
         alert('Login failed');
