@@ -6,11 +6,20 @@ import { useEffect, useState, useRef} from 'react';
 import L from 'leaflet';
 import { socket } from '../lib/socket';
 import { Marker, Popup } from 'react-leaflet';
+import iconRetina from '/src/assets/leaflet/marker-icon-2x.png';
+import icon from '/src/assets/leaflet/marker-icon.png';
+import shadow from '/src/assets/leaflet/marker-shadow.png';
 
 function LocationMarker({ user }) {
   const map = useMap();
   const markerRef = useRef(null);
   const initialCenter = useRef(false);
+
+  L.Icon.Default.mergeOptions({
+  iconRetinaUrl: iconRetina,
+  iconUrl: icon,
+  shadowUrl: shadow
+});
 
   useEffect(() => {
     if (!user || !user.username) return;
