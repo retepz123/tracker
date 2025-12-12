@@ -44,7 +44,12 @@ function Login() {
 
     } catch (error){
       console.error('Error:', error);
-      alert('Internal login error');
+    
+      if (error.response?.data?.message) {
+    alert(error.response.data.message);
+  } else {
+    alert('Something went wrong. Please try again.');
+  }
     }
 }
 
