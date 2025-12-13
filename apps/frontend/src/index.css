@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'MyFonts';
+  src: url('./assets/Strange\ Book.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

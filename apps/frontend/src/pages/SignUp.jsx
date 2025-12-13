@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { axiosInstance } from '../lib/axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import '../styleCss/signUp.css';
+import location from '../assets/location.gif';
 
 const BACKEND = import.meta.env.VITE_BACKEND_URL;
 
@@ -49,14 +51,20 @@ function SignUp() {
   }
 
   return (  
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <input onChange={handleChange} value={form.username} type='text' placeholder='Username' name='username' />
-        <input onChange={handleChange} value={form.password} type='password' placeholder='Password' name='password' />
-        <button type='submit'>Submit</button>
+    <div className='sign-container'>
+      <div className='tag-logo'>
+        <img src={location} className='location-marker' alt='logo' />
+        <p className='tagline'>Track users live, anywhere on the map</p>
+      </div>
+       <div className='form-container'>
+          <h1 className='sign-up'>Sign Up</h1>
+      <form className='sign-form' onSubmit={handleSubmit}>
+        <input className='sign-input' onChange={handleChange} value={form.username} type='text' placeholder='Username' name='username' />
+        <input className='sign-input' onChange={handleChange} value={form.password} type='password' placeholder='Password' name='password' />
+        <button className='sign-btn' type='submit'>Submit</button>
       </form>
       <Link to='/login'>Login</Link>
+       </div>
     </div>
   );
 }
