@@ -52,7 +52,8 @@ function SignUp() {
 
   return (  
     <div className='sign-container'>
-      <div className='tag-logo'>
+      <div className='sub-container'>
+         <div className='tag-logo'>
         <img src={location} className='location-marker' alt='logo' />
         <p className='tagline'>Track users live, anywhere on the map</p>
       </div>
@@ -63,8 +64,9 @@ function SignUp() {
         <input className='sign-input' onChange={handleChange} value={form.password} type='password' placeholder='Password' name='password' />
         <button className='sign-btn' type='submit'>Submit</button>
       </form>
-      <Link to='/login'>Login</Link>
+      <Link to='/login' className='log-btn' >Login</Link>
        </div>
+      </div>
     </div>
   );
 }

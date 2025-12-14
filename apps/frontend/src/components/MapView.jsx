@@ -104,7 +104,7 @@ export default function MapView() {
 
   return (
     <div className='container'>
-      <h1>Tracker</h1>
+      <h1 className='title-track'>Tracker</h1>
       <div className='map-container'>
         <MapContainer center={[14.2105, 121.0404]} zoom={13} className='map'>
           <TileLayer
